@@ -1,0 +1,10 @@
+mongodb+srv://mohini:mohiniraut@cluster0.6ga6xmi.mongodb.net/?appName=Cluster0
+
+
+firstName
+ lastName, 
+ userName,
+      mobileNumber,
+      email,
+      password,
+      lookingFor,
