@@ -128,52 +128,6 @@ exports.registerUser = async (req, res) => {
   }
 };
 
-// ✅ LOGIN USER
-// exports.loginUser = async (req, res) => {
-//   try {
-//     const { userName, password } = req.body;
-
-//     if (!userName || !password) {
-//       return res.status(400).json({ success: false, message: "Username आणि Password required आहे ❌" });
-//     }
-
-//     const user = await User.findOne({ userName });
-//     if (!user) {
-//       return res.status(404).json({ success: false, message: "User Not Found ❌" });
-//     }
-
-//     if (user.password !== password) {
-//       return res.status(401).json({ success: false, message: "Invalid Password ❌" });
-//     }
-
-//     const token = jwt.sign(
-//       { id: user._id, userName: user.userName, role: user.role },
-//       process.env.JWT_SECRET,
-//       { expiresIn: "7d" }
-//     );
-
-//     // ── office आणि departmentCategory पण return करा ──
-//     return res.status(200).json({
-//       success: true,
-//       message: "Login Success ✅",
-//       token,
-//       user: {
-//         id: user._id,
-//         fullName: user.fullName,
-//         userName: user.userName,
-//         role: user.role,
-//         departmentName: user.departmentName,
-//         office: user.office,                         // ← ADD
-//         departmentCategory: user.departmentCategory, // ← ADD
-//       },
-//     });
-
-//   } catch (error) {
-//     console.log("Login Error:", error);
-//     return res.status(500).json({ success: false, message: "Server Error ❌" });
-//   }
-// };
-
 
 exports.loginUser = async (req, res) => {
   try {
@@ -304,79 +258,6 @@ exports.loginByMobile = async (req, res) => {
   }
 };
 
-// ✅ UPDATE USER
-// exports.updateUser = async (req, res) => {
-//   try {
-//     const { id } = req.params;
-//     const updatePayload = req.body;
-
-//     if (!updatePayload || Object.keys(updatePayload).length === 0) {
-//       return res.status(400).json({ success: false, message: "Update data required ❌" });
-//     }
-
-//     // Never allow password update from this route
-//     delete updatePayload.password;
-
-//     // Trim & normalize
-//     if (updatePayload.fullName)     updatePayload.fullName     = updatePayload.fullName.trim();
-//     if (updatePayload.userName)     updatePayload.userName     = updatePayload.userName.trim().toLowerCase();
-//     if (updatePayload.mobileNumber) updatePayload.mobileNumber = updatePayload.mobileNumber.trim();
-//     if (updatePayload.email)        updatePayload.email        = updatePayload.email.trim().toLowerCase();
-
-//     // Mobile format check
-//     if (updatePayload.mobileNumber && !/^\d{10}$/.test(updatePayload.mobileNumber)) {
-//       return res.status(400).json({ success: false, message: "Invalid mobile number ❌ (10 digits required)" });
-//     }
-
-//     // Email format check
-//     if (updatePayload.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(updatePayload.email)) {
-//       return res.status(400).json({ success: false, message: "Invalid email address ❌" });
-//     }
-
-//     // Check duplicate userName
-//     if (updatePayload.userName) {
-//       const existing = await User.findOne({ userName: updatePayload.userName, _id: { $ne: id } });
-//       if (existing) {
-//         return res.status(409).json({ success: false, message: "Username already taken ❌" });
-//       }
-//     }
-
-//     // Check duplicate email
-//     if (updatePayload.email) {
-//       const existing = await User.findOne({ email: updatePayload.email, _id: { $ne: id } });
-//       if (existing) {
-//         return res.status(409).json({ success: false, message: "Email already registered ❌" });
-//       }
-//     }
-
-//     // Check duplicate mobileNumber
-//     if (updatePayload.mobileNumber) {
-//       const existing = await User.findOne({ mobileNumber: updatePayload.mobileNumber, _id: { $ne: id } });
-//       if (existing) {
-//         return res.status(409).json({ success: false, message: "Mobile number already registered ❌" });
-//       }
-//     }
-
-//     const user = await User.findByIdAndUpdate(id, updatePayload, {
-//       new: true, runValidators: true,
-//     }).select("-password");
-
-//     if (!user) {
-//       return res.status(404).json({ success: false, message: "User Not Found ❌" });
-//     }
-
-//     return res.status(200).json({
-//       success: true,
-//       message: "User Updated Successfully ✅",
-//       user,
-//     });
-
-//   } catch (error) {
-//     console.log("Update Error:", error);
-//     return res.status(500).json({ success: false, message: "Server Error ❌" });
-//   }
-// };
-
 
 // ✅ GET ALL USERS
 exports.getUsers = async (req, res) => {
@@ -453,6 +334,9 @@ exports.saveProfile = async (req, res) => {
       country:       req.body.country,
       currentState:  req.body.currentState,
       currentCity:   req.body.currentCity,
+       district:      req.body.district,    // 🆕
+      taluka:        req.body.taluka,      // 🆕
+      pincode:       req.body.pincode,     // 🆕
       birthCity:     req.body.birthCity,
       birthTime:     req.body.birthTime,
       rashi:         req.body.rashi,
@@ -469,8 +353,16 @@ exports.saveProfile = async (req, res) => {
       // Step 4
       fatherName:       req.body.fatherName,
       fatherOccupation: req.body.fatherOccupation,
+        fatherDistrict:        req.body.fatherDistrict,         // 🆕
+      fatherTaluka:          req.body.fatherTaluka,           // 🆕
+      fatherVillage:         req.body.fatherVillage,          // 🆕
+      fatherRelativeSurname: req.body.fatherRelativeSurname,  // 🆕
       motherName:       req.body.motherName,
       motherOccupation: req.body.motherOccupation,
+       motherDistrict:        req.body.motherDistrict,         // 🆕
+      motherTaluka:          req.body.motherTaluka,           // 🆕
+      motherVillage:         req.body.motherVillage,          // 🆕
+      motherRelativeSurname: req.body.motherRelativeSurname,  // 🆕
       brothers:         req.body.brothers,
       brothersMarried:  req.body.brothersMarried,
       sisters:          req.body.sisters,
@@ -511,6 +403,8 @@ exports.saveProfile = async (req, res) => {
       partnerDiet:          req.body.partnerDiet,
       partnerManglik:       req.body.partnerManglik,
       partnerDesc:          req.body.partnerDesc,
+      preferredSurname:     req.body.preferredSurname,   // 🆕
+      idDoc:                req.body.idDoc,               // 🆕 (सध्या simple string)
     };
 
     // ✅ Step 8 — Photo Cloudinary वर upload झाली असेल तर URL save करा

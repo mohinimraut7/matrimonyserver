@@ -34,6 +34,9 @@ const userSchema = new mongoose.Schema(
     country:      { type: String },
     currentState: { type: String },
     currentCity:  { type: String },
+    district:     { type: String },   // 🆕 added
+    taluka:       { type: String },   // 🆕 added
+    pincode:      { type: String },   // 🆕 added
     birthCity:    { type: String },
     birthTime:    { type: String },
     rashi:        { type: String },
@@ -52,8 +55,16 @@ const userSchema = new mongoose.Schema(
     // ✅ Step 4 — Family
     fatherName:       { type: String },
     fatherOccupation: { type: String },
+     fatherDistrict:        { type: String },   // 🆕 added
+    fatherTaluka:          { type: String },   // 🆕 added
+    fatherVillage:         { type: String },   // 🆕 added
+    fatherRelativeSurname: { type: String },   // 🆕 added
     motherName:       { type: String },
     motherOccupation: { type: String },
+      motherDistrict:        { type: String },   // 🆕 added
+    motherTaluka:          { type: String },   // 🆕 added
+    motherVillage:         { type: String },   // 🆕 added
+    motherRelativeSurname: { type: String },   // 🆕 added
     brothers:         { type: String },
     brothersMarried:  { type: String },
     sisters:          { type: String },
@@ -97,9 +108,11 @@ const userSchema = new mongoose.Schema(
     partnerDiet:          { type: String },
     partnerManglik:       { type: String },
     partnerDesc:          { type: String },
+    preferredSurname:     { type: String },   // 🆕 added
 
     // ✅ Step 8 — Photos
     photos:   [{ type: String }],
+    idDoc:    { type: String },   // 🆕 added
     verified: { type: Boolean, default: false },
   },
   { timestamps: true }
