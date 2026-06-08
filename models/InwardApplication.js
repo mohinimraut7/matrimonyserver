@@ -82,6 +82,12 @@ const inwardApplicationSchema = new mongoose.Schema(
       visitorPhoto: {
       type: String, // file path
     },
+ siblings: {
+      type:    String,
+    },
+siblingsMarried: {
+      type:    String,
+    },
 
 
     // ── Submitted By (authUser) ──
