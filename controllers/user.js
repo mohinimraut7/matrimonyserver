@@ -371,8 +371,8 @@ exports.saveProfile = async (req, res) => {
       familyValues:     req.body.familyValues,
       familyStatus:     req.body.familyStatus,
       familyLocation:   req.body.familyLocation,
-      siblings:req.body.familyLocation,
-      siblingsMarried:req.body.familyLocation,
+      siblings:req.body.siblings,
+      siblingsMarried:req.body.siblingsMarried,
       // Step 5
       education:      req.body.education,
       fieldOfStudy:   req.body.fieldOfStudy,
