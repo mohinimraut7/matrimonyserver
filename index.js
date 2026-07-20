@@ -9,10 +9,10 @@ const path = require("path");
 const cors = require("cors");
 
 const addUserRoutes = require("./routes/user");
-const revenueRoutes = require("./routes/revenue");
-const InwardApplicationRoutes = require("./routes/InwardApplication");
-const availabilityRoutes=require("./routes/Availability");
-const citizenRoutes = require("./routes/Citizen");
+// const revenueRoutes = require("./routes/revenue");
+// const InwardApplicationRoutes = require("./routes/InwardApplication");
+// const availabilityRoutes=require("./routes/Availability");
+// const citizenRoutes = require("./routes/Citizen");
 
 // uploads folder serve करण्यासाठी:
 app.use("/uploads", express.static("uploads"));
@@ -42,10 +42,10 @@ mongoose
   .catch((err) => console.log("❌ MongoDB connection error:", err));
 
 app.use("/api", addUserRoutes);
-app.use("/api", revenueRoutes);
-app.use("/api", InwardApplicationRoutes);
-app.use("/api",availabilityRoutes)
-app.use("/api/citizen", citizenRoutes);
+// app.use("/api", revenueRoutes);
+// app.use("/api", InwardApplicationRoutes);
+// app.use("/api",availabilityRoutes)
+// app.use("/api/citizen", citizenRoutes);
 
 
 

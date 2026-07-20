@@ -73,13 +73,9 @@ const userSchema = new mongoose.Schema(
     familyValues:     { type: String },
     familyStatus:     { type: String },
     familyLocation:   { type: String },
-    siblings: {
-      type:    String,
-    },
-siblingsMarried: {
-      type:    String,
-    },
-
+    siblings: {type:    String },
+     siblingsMarried: {  type:    String},
+   relativeSurname: { type:    String},
 
     // ✅ Step 5 — Education
     education:      { type: String },
